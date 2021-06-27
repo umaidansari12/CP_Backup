@@ -39,23 +39,25 @@ int main()
 	//cout << endl;
 	while (t--)
 	{
-		int l, r;
+		int l, r, count = 0;
 		cin >> l >> r;
 		int prime_min = INT_MAX, prime_max = INT_MIN;
 		for (int i = l; i <= r; i++)
 		{
 			if (prime[i])
 			{
-				prime_min = min(prime_min, i);
-				prime_max = max(prime_max, i);
+				// prime_min = min(prime_min, i);
+				// prime_max = max(prime_max, i);
+				count++;
 			}
 		}
-		if (prime_min == prime_max)
-			cout << 0 << endl;
-		else if (prime_min == INT_MAX)
-			cout << -1 << endl;
-		else
-			cout << (prime_max - prime_min) << endl;
+		// if (prime_min == prime_max)
+		// 	cout << 0 << endl;
+		// else if (prime_min == INT_MAX)
+		// 	cout << -1 << endl;
+		// else
+		// 	cout << (prime_max - prime_min) << endl;
+		cout << count << endl;
 	}
 
 
