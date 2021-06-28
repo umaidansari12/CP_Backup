@@ -44,10 +44,12 @@ int nkladdersBottomup(int n, int k)
 	return dp[n];
 }
 
+//O(n+k) approach
 int nkladdersBottomupOpt(int n, int k)
 {
 	int dp[n + 1] = {0};
 	dp[0] = dp[1] = 1;
+	// remove one cell from backward i.e dp[n-k-1] add current window sum stored at dp[n-1] got the window sum now include the forward element which is at index dp[n-1]
 	//Recurrence Relation for optimised approach is based on prefixsum and calculating sum of windows
 	// F[n] = F[n-1]//adding previous window sum - F[n-(k+1)] equivalent to F[n-k-1] + F[n-1] to calculate prefix sum
 	//to handle the case where (n-k-1) is -ve either we can divide the solution into two parts
