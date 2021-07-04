@@ -54,8 +54,8 @@ int maximizeTheCuts(int n, int x, int y, int z)
     rd.push_back(make_pair(y, 1));
     rd.push_back(make_pair(z, 1));
     vector<vector<int>>dp(3, vector<int>(n + 1, -1));
-    return rodCutting(rd, 3, n, 0, dp);
-    vector<int>dp(n + 1, -1);*/
+    return rodCutting(rd, 3, n, 0, dp);*/
+    vector<int>dp(n + 1, -1);
     dp[0] = 0;
     for (int i = 1; i <= n; i++)
     {
