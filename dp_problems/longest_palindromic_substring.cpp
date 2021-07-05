@@ -2,6 +2,49 @@
 using namespace std;
 
 
+class Solution {
+public:
+	string longestPalindrome(string s) {
+		int n = s.size(), maxLength = 1, start = 0;
+		bool dp[n][n];
+		memset(dp, 0, sizeof(dp));
+		for (int i = 0; i < n; i++)
+		{
+			dp[i][i] = true;
+		}
+		for (int i = 0; i < n - 1; i++)
+		{
+			if (s[i] == s[i + 1])
+			{
+				dp[i][i + 1] = true;
+				if (maxLength < 2)
+				{
+					start = i;
+					maxLength = 2;
+				}
+			}
+
+		}
+		for (int k = 3; k <= n; k++)
+		{
+			for (int i = 0; i < (n - k + 1); i++)
+			{
+				int j = i + k - 1;
+				if (s[i] == s[j] and dp[i + 1][j - 1])
+				{
+					dp[i][j] = true;
+					if (maxLength < k)
+					{
+						start = i;
+						maxLength = k;
+					}
+				}
+			}
+		}
+		return s.substr(start, maxLength);
+	}
+};
+
 // } Driver Code Ends
 class Solution {
 public:
