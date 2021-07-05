@@ -2,6 +2,28 @@
 using namespace std;
 
 // } Driver Code Ends
+class Solution1 {
+public:
+    int solve(vector<int>c, int s, int m, int i, vector<vector<int>>&dp)
+    {
+        if (i >= m || s < 0)
+            return 0;
+        if (s == 0)
+            return 1;
+        if (dp[i][s] != -1)
+            return dp[i][s];
+        return dp[i][s] = solve(c, s - c[i], m, i, dp) + solve(c, s, m, i + 1, dp);
+    }
+    int change(int amount, vector<int>& coins) {
+        if (coins.size() == 0 && amount == 0)
+            return 1;
+        if (coins.size() == 0)
+            return 0;
+        vector<vector<int>> dp(coins.size(), vector<int>(amount + 1, -1));
+        return solve(coins, amount, coins.size(), 0, dp);
+
+    }
+};
 class Solution
 {
 public:

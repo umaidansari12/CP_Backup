@@ -2,6 +2,23 @@
 
 using namespace std;
 
+class Solution {
+public:
+    string largestNumber(vector<int>& nums) {
+        sort(nums.begin(), nums.end(), [](const int a, const int b) {
+            string f = to_string(a) + to_string(b);
+            string l = to_string(b) + to_string(a);
+            return f > l;
+        });
+        string s;
+        if (nums[0] == 0)
+            return "0";
+        for (auto i : nums)
+            s += to_string(i);
+        return s;
+    }
+};
+
 
 // } Driver Code Ends
 //User function template for C++
