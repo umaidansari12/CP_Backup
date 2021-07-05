@@ -5,6 +5,53 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 public:
+	string longestPalinBottomUp (string S) {
+		// code here
+		int n = S.size(), start = -1;
+		bool dp[n][n];
+		memset(dp, 0, sizeof(dp));
+		int maxLength = 1;
+		for (int i = 0; i < n; i++)
+			dp[i][i] = true; //filling for diagonal (start,end)->(i,i) substring starting
+		//at index i and ending at index i means a 1 length string and which is always
+		// a palindrome
+		for (int i = 0; i < n - 1; i++)
+		{
+			if (S[i] == S[i + 1])
+			{
+				dp[i][i + 1] = true;
+				//filling for 2 length (start,end)->(i,i+1) substring starting
+				//at index i and ending at index i+1 means a 2 length string and check
+				//if the next character is equal then it is
+				// a palindrome
+				if (maxLength < 2)
+				{
+					start = i;
+					maxLength = 2;
+				}
+			}
+		}
+		//now checking our condition for len>=3 where
+		// check boundary element are equal and
+		// check if non boundary string are queal by checking dp[i+1][j-1] is true or not
+		for (int k = 3; k <= n; k++)
+		{
+			for (int i = 0; i < n - k + 1; i++)
+			{
+				int j = i + k - 1;
+				if (S[i] == S[j] and dp[i + 1][j - 1])
+				{
+					dp[i][j] = true;
+					if (maxLength < k)
+					{
+						start = i;
+						maxLength = k;
+					}
+				}
+			}
+		}
+		return S.substr(start, maxLength);
+	}
 	bool isPalindrome(string s)
 	{
 		string rev = s;
