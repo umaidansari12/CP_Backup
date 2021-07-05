@@ -50,8 +50,8 @@ int main()
 	cin >> t;
 	while (t--)
 	{
-		int n, ans = 0;
-		cin >> n;
+		int n, m, ans = 0;
+		cin >> n >> m;
 		vector<vector<int>> a(n, vector<int>(n, 0));
 		for (int i = 0; i < n; i++)
 		{
@@ -60,11 +60,11 @@ int main()
 				cin >> a[i][j];
 			}
 		}
-		/*for (int i = 0; i < n; i++)
+		for (int i = 0; i < n; i++)
 		{
 			maxPath(a, 0, i, n, a[0][i], ans);
 		}
-		cout << ans << endl;*/
+		cout << ans << endl;
 		cout << maxPathBottomUp(a, n) << endl;
 	}
 
