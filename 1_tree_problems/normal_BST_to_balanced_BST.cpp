@@ -166,3 +166,44 @@ Node* buildBalancedTree(Node* root)
 
     return buildTree(r, 0, r.size() - 1);
 }
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<TreeNode*> sortedArray;
+    void inorder(TreeNode* root)
+    {
+        if (!root)
+            return;
+        inorder(root->left);
+        sortedArray.push_back(root);
+        inorder(root->right);
+    }
+    TreeNode* buildTree(int low, int high)
+    {
+        if (low > high)
+            return NULL;
+        int mid = (low + high) / 2;
+        TreeNode* root = sortedArray[mid];
+        root->left = buildTree(low, mid - 1);
+        root->right = buildTree(mid + 1, high);
+        return root;
+    }
+    TreeNode* balanceBST(TreeNode* root) {
+        if (!root)
+            return root;
+        inorder(root);
+        return buildTree(0, sortedArray.size() - 1);
+    }
+};
