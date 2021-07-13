@@ -28,6 +28,29 @@ struct Node {
 struct Node* pairwise_swap(struct Node* head)
 {
     // your code here
+    /*
+    if (!head or !head->next)
+            return head;
+        Node* prev = head;
+        Node* curr = head->next;
+        head = curr;
+        Node* next = NULL;
+        while (1)
+        {
+            next = curr->next;
+            curr->next = prev;
+            if (next == NULL || next->next == NULL)
+            {
+                prev->next = next;
+                break;
+            }
+            prev->next = next->next;
+            prev = next;
+            curr = next->next;
+        }
+
+        return head;
+    */
     vector<Node*> list;
     Node* curr = head;
     while (curr)
