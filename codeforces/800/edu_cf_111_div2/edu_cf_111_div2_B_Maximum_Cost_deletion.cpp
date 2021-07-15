@@ -32,13 +32,26 @@ int solve()
 	}
 	else
 	{
-		int count = 1;
-		for (int i = 1; i < n; i++)
+		// int count = 1;
+		// for (int i = 1; i < n; i++)
+		// {
+		// 	if (s[i] != s[i - 1])
+		// 		count++;
+		// }
+		// ans += (count / 2 + 1 ) * b;
+		int zeroCount = 0 , onesCount = 0;
+		char last = 'a';
+		for (auto c : s)
 		{
-			if (s[i] != s[i - 1])
-				count++;
+			if (c == last)
+				continue;
+			last = c;
+			if (c == '0')
+				zeroCount++;
+			else
+				onesCount++;
 		}
-		ans += (count / 2 + 1 ) * b;
+		ans += min(1 + zeroCount, 1 + onesCount) * b;
 	}
 	return ans;
 }
