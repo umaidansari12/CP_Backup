@@ -170,3 +170,49 @@ public:
 
     }
 };
+
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+TreeNode* solve(ListNode* head, ListNode* tail)
+{
+    if (head == tail)
+        return NULL;
+    if (head->next == tail)
+    {
+        TreeNode* root = new TreeNode(head->val);
+        return root;
+    }
+    ListNode* mid = head;
+    ListNode* fast = head;
+    while (fast != tail and fast->next != tail)
+    {
+        mid = mid->next;
+        fast = fast->next->next;
+    }
+    TreeNode* root = new TreeNode(mid->val);
+    root->left = solve(head, mid);
+    root->right = solve(mid->next, tail);
+    return root;
+}
+TreeNode* Solution::sortedListToBST(ListNode* A) {
+    // Do not write main() function.
+    // Do not read input, instead use the arguments to the function.
+    // Do not print the output, instead return values as specified
+    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+    return solve(A, NULL);
+}
