@@ -40,6 +40,8 @@ int minNumberofJumpsTopDown(vector<int>&a, int i, int n, vector<int>&dp)
 	return dp[i];
 }
 
+int minNumberofJumpsBottomUp(vector<int>&a, int )
+
 int main()
 {
 	ios_base :: sync_with_stdio(false);
