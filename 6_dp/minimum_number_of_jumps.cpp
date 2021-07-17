@@ -40,7 +40,26 @@ int minNumberofJumpsTopDown(vector<int>&a, int i, int n, vector<int>&dp)
 	return dp[i];
 }
 
-int minNumberofJumpsBottomUp(vector<int>&a, int )
+int minNumberofJumpsBottomUp(vector<int>&a, int n)
+{
+	vector<int> dp(n, INT_MAX);
+	dp[0] = 0;//base case need 0 steps to reach the starting index of the array
+	for (int i = 1; i < n; i++)
+	{
+		//checking from starting uptil (i-1)th index that we can reach to ith index or not
+		for (int j = 0; j < i; j++)
+		{
+			//dp[j]!=INT_MAX;means can we reach jth index from starting and a
+			//[j]+j>=i is a check to tell if you can either reach at ith
+			//index or beyond that then update the answe
+			if (dp[j] != INT_MAX and a[j] + j >= i)
+			{
+				dp[i] = min(dp[i], 1 + dp[j]);
+			}
+		}
+	}
+	return dp[n - 1] != INT_MAX ? dp[n - 1] : -1;
+}
 
 int main()
 {
