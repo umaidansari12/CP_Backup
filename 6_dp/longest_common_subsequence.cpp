@@ -39,7 +39,6 @@ public:
 			return dp[n - 1][m - 1] = max(longestCommonSubsequenceTopDown(s1, s2, n, m - 1, dp), longestCommonSubsequenceTopDown(s1, s2, n - 1, m, dp));
 	}
 	int longestCommonSubsequence(string text1, string text2) {
-
 		vector<vector<int>> dp(text1.size(), vector<int>(text2.size(), -1));
 		return longestCommonSubsequenceTopDown(text1, text2, text1.size(), text2.size(), dp);
 
@@ -69,6 +68,26 @@ int longestCommonSubsequenceBottomUp(string s1, string s2, int n, int m)
 			}
 		}
 	}
+
+	//print lcs
+	int i = n, j = m;
+	vector<char> res;
+	while (i != 0 and j != 0)
+	{
+		if (dp[i][j] == dp[i - 1][j])
+			i--;
+		else if (dp[i][j] == dp[i][j - 1])
+			j--;
+		else {
+			res.push_back(s1[i - 1]);
+			i--;
+			j--;
+		}
+	}
+	reverse(res.begin(), res.end());
+	for (auto x : res)
+		cout << x << " ";
+	cout << endl;
 	return dp[n][m];
 }
 
