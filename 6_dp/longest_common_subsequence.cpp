@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+using ll = long long;
+
+int longestCommonSubsequence(string s1, string s2, int n, int m)
+{
+	if (n == 0 or m == 0)
+		return 0;
+	if (s1[n - 1] == s2[m - 1])
+		return 1 + longestCommonSubsequence(s1, s2, n - 1, m - 1);
+	else
+		return max(longestCommonSubsequence(s1, s2, n, m - 1), longestCommonSubsequence(s1, s2, n - 1, m));
+}
+
+int longestCommonSubsequenceTopDown(string s1, string s2, int n, int m, vector<vector<int>>&dp)
+{
+	if (n == 0 or m == 0)
+		return 0;
+	if (dp[n - 1][m - 1] != -1)
+		return dp[n - 1][m - 1];
+	if (s1[n - 1] == s2[m - 1])
+		return dp[n - 1][m - 1] = 1 + longestCommonSubsequenceTopDown(s1, s2, n - 1, m - 1, dp);
+	else
+		return dp[n - 1][m - 1] = max(longestCommonSubsequenceTopDown(s1, s2, n, m - 1, dp), longestCommonSubsequenceTopDown(s1, s2, n - 1, m, dp));
+}
+
+class Solution {
+public:
+	int longestCommonSubsequenceTopDown(string &s1, string &s2, int n, int m, vector<vector<int>>&dp)
+	{
+		if (n == 0 or m == 0)
+			return 0;
+		if (dp[n - 1][m - 1] != -1)
+			return dp[n - 1][m - 1];
+		if (s1[n - 1] == s2[m - 1])
+			return dp[n - 1][m - 1] = 1 + longestCommonSubsequenceTopDown(s1, s2, n - 1, m - 1, dp);
+		else
+			return dp[n - 1][m - 1] = max(longestCommonSubsequenceTopDown(s1, s2, n, m - 1, dp), longestCommonSubsequenceTopDown(s1, s2, n - 1, m, dp));
+	}
+	int longestCommonSubsequence(string text1, string text2) {
+
+		vector<vector<int>> dp(text1.size(), vector<int>(text2.size(), -1));
+		return longestCommonSubsequenceTopDown(text1, text2, text1.size(), text2.size(), dp);
+
+	}
+};
+
+int longestCommonSubsequenceBottomUp(string s1, string s2, int n, int m)
+{
+	vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+	dp[0][0] = 1;
+}
+
+int main()
+{
+	ios_base :: sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		string s1, s2;
+		cin >> s1 >> s2;
+		vector<vector<int>> dp(s1.size(), vector<int>(s2.size(), -1));
+		//cout << longestCommonSubsequence(s1, s2, s1.size(), s2.size()) << endl;
+		cout << longestCommonSubsequenceTopDown(s1, s2, s1.size(), s2.size(), dp) << endl;
+	}
+
+
+	return 0;
+}
