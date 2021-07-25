@@ -104,7 +104,7 @@ int main() {
         int n;
         cin >> n;
         Solution ob;
-        auto ans = ob.countStrings(n);
+        auto ans = ob.countStringsBottomUp(n);
         cout << ans << "\n";
     }
     return 0;
