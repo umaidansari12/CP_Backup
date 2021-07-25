@@ -27,6 +27,17 @@ int solve(int *a, int size, int k, int idx)
 
 }
 
+
+ll solveAnswer(int *a, int size, int k)
+{
+	for (int i = 0; i < min(2 * k, size); i++)
+	{
+		a[i] ^= (size - 1);
+	}
+	return xorsum(a, size);
+	return min(2 * k, size) * (size - 1);
+}
+
 int main()
 {
 	ios_base :: sync_with_stdio(false);
@@ -36,14 +47,14 @@ int main()
 	cin	>> t;
 	while (t--)
 	{
-		int n, k;
+		ll n, k;
 		cin >> n >> k;
-		int size = pow(2, n);
-		int a[size];
-		for (int i = 0; i < size; i++)
-			a[i] = i;
-
-		cout << solve(a, size, k, 0) << endl;
+		ll size = pow(2, n);
+		// int a[size];
+		// for (int i = 0; i < size; i++)
+		// 	a[i] = i;
+		ll ans = min(2 * k, size) * (size - 1);
+		cout << ans << endl;
 
 	}
 
