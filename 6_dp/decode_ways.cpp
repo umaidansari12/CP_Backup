@@ -27,35 +27,33 @@ void decodeWays(string s, int idx, string res, map<string, string>& m, int &cnt)
 	decodeWays(s, idx + 1, res + s[idx] + " ", m, cnt);
 }
 
-void decodeWaysOther(string s, int idx, vector<string> &res, string temp, map<string, string>&m, int &cnt)
-{
-	if (idx == s.size())
-	{
-		// bool flag = false;
-
-		// for (int i = 0; i < res.size(); i++)
-		// {
-		// 	cout << res[i] << " ";
-		// 	if (m.find(res[i]) == m.end())
-		// 	{
-		// 		flag = true;
-		// 		break;
-		// 	}
-		// }
-		// while (getline(ss, token, ' '))
-		// {
-
-		// 	//cout << res << endl;
-		// }
-		// if (!flag)
-		// 	cnt++;
-		cout << temp << endl;
-		return;
+class Solution {
+public:
+	int numDecodings(string s) {
+		return s.empty() ? 0 : numDecodings(0, s);
 	}
-	decodeWaysOther(s, idx + 1, res, temp + s[idx], m, cnt);
-	decodeWaysOther(s, idx + 1, res, temp , m, cnt);
-}
-
+	int numDecodings(int p, string& s) {
+		int n = s.size();
+		if (p == n) return 1;
+		if (s[p] == '0') return 0; // sub string starting with 0 is not a valid encoding
+		int res = numDecodings(p + 1, s);
+		if ( p < n - 1 && (s[p] == '1' || (s[p] == '2' && s[p + 1] < '7'))) res += numDecodings(p + 2, s);
+		return res;
+	}
+	int numDecodings(string s) {
+		int n = s.size();
+		vector<int> mem(n + 1, -1);
+		mem[n] = 1;
+		return s.empty() ? 0 : num(0, s, mem);
+	}
+	int num(int i, string &s, vector<int> &mem) {
+		if (mem[i] > -1) return mem[i];
+		if (s[i] == '0') return mem[i] = 0;
+		int res = num(i + 1, s, mem);
+		if (i < s.size() - 1 && (s[i] == '1' || s[i] == '2' && s[i + 1] < '7')) res += num(i + 2, s, mem);
+		return mem[i] = res;
+	}
+};
 
 int main()
 {
@@ -97,7 +95,7 @@ int main()
 		m["26"] = 'Z';
 		int cnt = 0;
 		vector<string> res;
-		decodeWaysOther(s, 0, res, "", m, cnt);
+		decodeWays1(s, 0, "", m, cnt);
 		cout << cnt / 2 << endl;
 	}
 
