@@ -36,6 +36,108 @@ ll BSearch1(ll a, ll b, ll c, ll d, ll k)
 	return ans;
 }
 
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll unsigned long long int
+
+ll a, b, c, d, k;
+
+ll F(ll mid, ll a, ll b, ll c, ll d)
+{
+	return (a * mid * mid * mid) + (b * mid * mid) + (c * mid) + d;
+}
+
+
+int main()
+{
+	ios_base :: sync_with_stdio(false);
+	cin.tie(NULL);
+	//cout.tie(NULL);
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		cin >> a >> b >> c >> d >> k;
+		if (d >= k)
+			cout << "0\n";
+		else
+		{
+			ll low = 0 , high = 1000000, ans = 0, mid;
+			while (low <= high)
+			{
+				mid = low + (high - low) / 2;
+				ll F1 = F(mid, a, b, c, d);
+				ll F2 = F(mid + 1, a, b, c, d);
+				if (F1 <= k and F2 > k)
+				{
+					ans = mid;
+					break;
+				}
+				else if (F1 <= k)
+					low = mid + 1;
+				else
+					high = mid - 1;
+			}
+			cout << ans << '\n';
+		}
+
+	}
+
+
+	return 0;
+}
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll unsigned long long int
+
+ll a, b, c, d, k;
+
+ll F(ll mid, ll a, ll b, ll c, ll d)
+{
+	return (a * mid * mid * mid) + (b * mid * mid) + (c * mid) + d;
+}
+
+
+int main()
+{
+	ios_base :: sync_with_stdio(false);
+	cin.tie(NULL);
+	//cout.tie(NULL);
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		cin >> a >> b >> c >> d >> k;
+		if (d >= k)
+			cout << "0\n";
+		else
+		{
+			ll low = 0 , high = ceil(cbrt(k)) + 1, ans = 0, mid;
+			while (low <= high)
+			{
+				mid = low + (high - low) / 2;
+				ll F1 = F(mid, a, b, c, d);
+				ll F2 = F(mid + 1, a, b, c, d);
+				if (F1 <= k and F2 > k)
+				{
+					ans = mid;
+					break;
+				}
+				else if (F1 <= k)
+					low = mid + 1;
+				else
+					high = mid - 1;
+			}
+			cout << ans << '\n';
+		}
+
+	}
+
+
+	return 0;
+}
 
 ll BSearch(ll a, ll b, ll c, ll d, ll k)
 {
