@@ -16,7 +16,7 @@ ll BSearch1(ll a, ll b, ll c, ll d, ll k)
 	high = 799000;
 	//since ((10^6)^3) = 10^18
 
-	//so upperbound for t is 10^6
+	//so upperbound for high is 10^6
 	while (low <= high)
 	{
 		mid = low + (high - low) / 2;
