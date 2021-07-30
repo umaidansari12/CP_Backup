@@ -44,7 +44,7 @@ int getAns(string st)
 			L = mid + 1;
 	}
 
-	if (res == INF) return 0;
+	if (res == INT_MAX) return 0;
 	else		   return res;
 }
 
