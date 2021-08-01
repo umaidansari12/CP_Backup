@@ -12,27 +12,43 @@ int main()
 	cin >> t;
 	while (t--)
 	{
-		int n, cnt = 0;
+		ll n, cnt = 0;
 		cin >> n;
 		ll a[n];
-		double ans[n];
-		map<double, int> m;
+		unordered_map<ll, ll> m;
+
 		for (int i = 0; i < n; i++)
 		{
 			cin >> a[i];
-			ans[i] = 1 / (double)a[i];
-			m[ans[i]]++;
+			m[a[i]]++;
 		}
 
-		sort(ans, ans + n, greater<double>());
-
-		for (int i = 1; i < n; i++)
+		for (auto count : m)
 		{
-			if (ans[i] != ans[i - 1])
-				cnt += i;
+			if (count.second == 1)
+				cnt += (n - count.second);
 			else
-				cnt += (i - m[ans[i]] + 1);
+				cnt += ((n - count.second) * count.second);
 		}
+
+		// double ans[n];
+		// map<double, int> m;
+		// for (int i = 0; i < n; i++)
+		// {
+		// 	cin >> a[i];
+		// 	ans[i] = 1 / (double)a[i];
+		// 	m[ans[i]]++;
+		// }
+
+		// sort(ans, ans + n, greater<double>());
+
+		// for (int i = 1; i < n; i++)
+		// {
+		// 	if (ans[i] != ans[i - 1])
+		// 		cnt += i;
+		// 	else
+		// 		cnt += (i - m[ans[i]] + 1);
+		// }
 
 		// for (int i = 0; i < n; i++)
 		// {
@@ -53,7 +69,8 @@ int main()
 
 		// 	}
 		// }
-		cout << cnt * 2LL << '\n';
+		cout << cnt << '\n';
+		//cout << cnt * 2LL << '\n';
 	}
 
 
