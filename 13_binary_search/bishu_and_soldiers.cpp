@@ -37,16 +37,31 @@ int main()
 	{
 		int cnt = 0, i = 0;
 		cin >> t;
-		// int idx = upper_bound(a, a + n, t) - a;
-		// cout << idx << ' ' << pre[idx - 1] << '\n';
-		for (i = 0; i < n; i++)
-			if (a[i] <= t)
+
+		int low = 0 , high = n - 1, ans = -1, mid;
+		while (low <= high)
+		{
+			mid = low + (high - low) / 2;
+			if (a[mid] <= t)
 			{
-				cnt++;
+				ans = mid;
+				low = mid + 1;
 			}
 			else
-				break;
-		cout << cnt << ' ' << pre[i - 1] << '\n';
+				high = mid - 1;
+		}
+
+		cout << ans + 1 << ' ' << pre[ans] << '\n';
+		// int idx = upper_bound(a, a + n, t) - a;
+		// cout << idx << ' ' << pre[idx - 1] << '\n';
+		// for (i = 0; i < n; i++)
+		// 	if (a[i] <= t)
+		// 	{
+		// 		cnt++;
+		// 	}
+		// 	else
+		// 		break;
+		// cout << cnt << ' ' << pre[i - 1] << '\n';
 
 	}
 
