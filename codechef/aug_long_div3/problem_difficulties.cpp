@@ -6,13 +6,25 @@ using ll = long long;
 int solve1()
 {
 	set<int> s;
-	int x;
+	int a[4] = {0};
 	for (int i = 0; i < 4; i++)
 	{
-		cin >> x;
-		s.insert(x);
+		cin >> a[i];
+		s.insert(a[i]);
 	}
-	return s.size() / 2;
+	if (s.size() == 4)
+		return 2;
+	else if (s.size() == 3)
+		return 2;
+	else if (s.size() == 2)
+	{
+		sort(a, a + 4);
+		if (a[0] == a[1])
+			return 2;
+		else
+			return 1;
+	}
+	return 0;
 }
 
 int solve()
@@ -22,10 +34,11 @@ int solve()
 	for (int i = 0; i < 4; i++)
 	{
 		cin >> a[i];
+		v[i] = false;
 	}
 	for (int i = 0; i < 4; i++)
 	{
-		for (int j = 0; j < 4; j++)
+		for (int j = i + 1; j < 4; j++)
 		{
 			if (i != j and a[i] != a[j] and !v[i] and !v[j])
 			{
