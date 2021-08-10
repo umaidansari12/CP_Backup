@@ -6,16 +6,16 @@ using ll = long long;
 
 //top down is coming as wrong
 
-int longestIncreasingSubsequenceTopDown(int *a, int idx, int n, int parent, vector<int>&dp)
+int longestIncreasingSubsequenceTopDown(int a[], int idx, int n, int parent, vector<int>&dp)
 {
 	if (dp[idx] != INT_MIN)
 		return dp[idx];
 	if (idx == n)
 		return 0;
 	if (a[idx] > parent)
-		return dp[idx] = max(dp[idx], max(1 + longestIncreasingSubsequence(a, idx + 1, n, a[idx], dp), longestIncreasingSubsequence(a, idx + 1, n, parent, dp)));
+		return dp[idx] = max(dp[idx], max(1 + longestIncreasingSubsequenceTopDown(a[idx], idx + 1, n, a[idx], dp), longestIncreasingSubsequenceTopDown(a, idx + 1, n, parent, dp)));
 	else
-		return dp[idx] = max(dp[idx], longestIncreasingSubsequence(a, idx + 1, n, parent, dp));
+		return dp[idx] = max(dp[idx], longestIncreasingSubsequenceTopDown(a, idx + 1, n, parent, dp));
 }
 int longestSubsequence(int n, int a[])
 {
@@ -25,7 +25,7 @@ int longestSubsequence(int n, int a[])
 	return *max_element(dp.begin(), dp.end());
 }
 
-int longestIncreasingSubsequenceRecursion(vector<int>&a, int idx, int n, int parent)
+int longestIncreasingSubsequence(vector<int>&a, int idx, int n, int parent)
 {
 	if (idx == n)
 		return 0;
@@ -44,7 +44,7 @@ int longestIncreasingSubsequenceBottomUp(vector<int>&a, int n)
 	{
 		for (int j = 0; j < i; j++)
 		{
-			if (arr[j] < arr[i])
+			if (a[j] < a[i])
 			{
 				dp[i] = max(dp[i], 1 + dp[j]);
 				len = max(len, dp[i]);
@@ -52,6 +52,31 @@ int longestIncreasingSubsequenceBottomUp(vector<int>&a, int n)
 		}
 
 	}
+	int ind = -1;
+	vector<int> res;
+	for (int i = n - 1; i >= 0; i--)
+	{
+		if (len == dp[i])
+		{
+			ind = i;
+		}
+	}
+	res.push_back(a[ind]);
+	for (int i = ind; i >= 0; i--)
+	{
+		if ((dp[i] + 1) == dp[ind] and a[i] < a[ind])
+		{
+			ind = i;
+			res.push_back(a[ind]);
+		}
+	}
+
+	reverse(res.begin(), res.end());
+	for (auto i : res)
+		cout << i << " ";
+	cout << endl;
+
+
 	return len;
 
 }
@@ -69,7 +94,8 @@ int main()
 		vector<int> a(n);
 		for (int i = 0; i < n; i++)
 			cin >> a[i];
-		cout << longestIncreasingSubsequence(a, 0, n, INT_MIN) << endl;
+		//cout << longestIncreasingSubsequence(a, 0, n, INT_MIN) << endl;
+		cout << longestIncreasingSubsequenceBottomUp(a, n) << endl;
 	}
 
 
