@@ -97,6 +97,52 @@ public:
 };
 
 
+#include<bits/stdc++.h>
+
+
+bool isPossibleHelper(vector<int>& arr, long long barrier, int n, int k)
+{
+	int partition = 1, paints = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] > barrier)
+			return false;
+		if ((paints + arr[i]) > barrier)
+		{
+			partition++;
+			paints = arr[i];
+		}
+		else
+			paints += arr[i];
+	}
+	if (partition > k)
+		return false;
+	return true;
+}
+
+int paint(int A, int B, vector<int> &arr) {
+
+	// code here
+	int n = arr.size();
+	long long low = *max_element(arr.begin(), arr.end()), high = accumulate(arr.begin(), arr.end(), 0LL), ans = 0LL, mid;
+	while (low <= high)
+	{
+		mid = low + (high - low) / 2;
+		if (isPossibleHelper(arr, mid, n, A))
+		{
+			ans = mid;
+			high = mid - 1;
+		}
+		else
+			low = mid + 1;
+	}
+
+	return (B * ans) % 10000003;
+	// return minimum time
+
+}
+
+
 // { Driver Code Starts.
 
 int main()
