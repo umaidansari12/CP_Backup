@@ -35,6 +35,34 @@ int longestIncreasingSubsequence(vector<int>&a, int idx, int n, int parent)
 		return longestIncreasingSubsequence(a, idx + 1, n, parent);
 }
 
+int longestSubsequence(int n, int a[])
+{
+	// your code here
+	// this is the NlogN approach in this what we are doing is we are creating a resultant array in which we
+	// push the first element of the array then we traverse the array and check the element which is present at the back
+	// of the resultant array is less than that of the array element then we simply push it into the resultant array because we are trying to maintain a sorted order and
+	// take as many as possible elements into the resultant array and if any bigger element is come we cant include other smaller elements so we need to remove it
+	// and include smaller elements so if the array element is less than that present at the back then we do binary search in the result array
+	// to find the position of the current array element and store the current array element there.
+
+	// time complexity: O(nlogn) - > traversing n size array and doing binary search every time logn time
+
+	vector<int> res;
+	res.push_back(a[0]);
+	for (int i = 1; i < n; i++)
+	{
+		if (res.back() < a[i])
+			res.push_back(a[i]);
+		else
+		{
+			int ind = lower_bound(res.begin(), res.end(), a[i]) - res.begin();
+			res[ind] = a[i];
+		}
+	}
+	int s = res.size();
+	return res.size();
+}
+
 int longestIncreasingSubsequenceBottomUp(vector<int>&a, int n)
 {
 	// your code here
