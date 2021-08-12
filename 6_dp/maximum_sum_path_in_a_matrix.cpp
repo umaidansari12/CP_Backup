@@ -12,6 +12,32 @@ void maxPath(vector<vector<int>> a, int r, int c, int n, int m, int sum, int &an
 		maxPath(a, r + 1, c - 1, n, m, sum + a[r + 1][c - 1], ans);
 }
 
+int maximumPath(int N, vector<vector<int>> Matrix)
+{
+	// code here
+	int n = Matrix.size();
+	//vector<vector<int>> dp(n,0);
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (i != 0)
+			{
+				int val = Matrix[i - 1][j];
+				if ((j - 1) >= 0)
+					val = max(val, Matrix[i - 1][j - 1]);
+				if ((j + 1) < n)
+					val = max(val, Matrix[i - 1][j + 1]);
+				Matrix[i][j] = Matrix[i][j] + val;
+			}
+		}
+	}
+	int ans = 0;
+	for (auto i : Matrix[n - 1])
+		ans = max(ans, i);
+	return ans;
+}
+
 int maxPathBottomUp(vector<vector<int>>a, int n, int m)
 {
 	vector<vector<int>> dp(n, vector<int>(n, 0));
