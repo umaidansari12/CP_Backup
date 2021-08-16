@@ -102,3 +102,49 @@ public:
 
     }
 };
+
+class Solution {
+public:
+    bool topoSort(int node, vector<int> graph[], vector<bool>&vis, stack<int>&s, vector<bool>&rec)
+    {
+        vis[node] = true;
+        rec[node] = true;
+        for (auto neighbour : graph[node])
+        {
+            if (!vis[neighbour] and topoSort(neighbour, graph, vis, s, rec))
+            {
+                return true;
+            }
+            else if (rec[neighbour])
+                return true;
+        }
+        s.push(node);
+        rec[node] = false;
+        return false;
+    }
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<int> graph[numCourses];
+        for (auto edge : prerequisites)
+        {
+            graph[edge[0]].push_back(edge[1]);
+        }
+        vector<bool> vis(numCourses, false), rec(numCourses, false);
+        stack<int> s;
+        vector<int> topo;
+        for (int i = 0; i < numCourses; i++)
+        {
+            if (!vis[i])
+            {
+                if (topoSort(i, graph, vis, s, rec))
+                    return {};
+            }
+        }
+        while (!s.empty())
+        {
+            topo.push_back(s.top());
+            s.pop();
+        }
+        reverse(topo.begin(), topo.end());
+        return topo;
+    }
+};
