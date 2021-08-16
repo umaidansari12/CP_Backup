@@ -68,7 +68,7 @@ void dfs(vector<int> adj[], bool* vis, int node, stack<int>&s)
 			dfs(adj, vis, i, s);
 		}
 	}
-	s.push(node);
+	s.push(node);//taking stack to push all the adjacent nodes first into the stack then after  the node which have called the dfs will be pushed inside the stack
 }
 vector<int> topoSort(int V, vector<int> adj[]) {
 	// Your code here
