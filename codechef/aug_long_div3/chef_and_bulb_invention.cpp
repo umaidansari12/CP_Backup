@@ -254,7 +254,7 @@ ll solve()
 	ll last = (n / k) * k;//finding the last multiple of k i.e less than or equal to n
 	ll times = (last / k);//same number of elements that will be present in every group if the group is complete i.e n%k==0
 
-	cnt = ans * rem;//counting the number of elements which are present in rows that are before p
+	cnt = times * rem;//counting the number of elements which are present in rows that are before p
 	cnt += (p / k);//including the number which are present in same row as p but before p
 
 	cnt += (min(rem, n % k)); //including those numbers which are  greater than p but have modulo less than the p
@@ -270,7 +270,7 @@ int main()
 	int t;
 	cin >> t;
 	while (t--) {
-		cout << solve() << '\n';
+		cout << solve3() << '\n';
 	}
 
 	return 0;
