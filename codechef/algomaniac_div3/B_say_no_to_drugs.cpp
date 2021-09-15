@@ -41,6 +41,7 @@ void solve1() {
 	if ((a[n - 1] + countDrugs) > mx)
 	{
 		cout << "Yes\n";
+
 		return;
 	}
 
