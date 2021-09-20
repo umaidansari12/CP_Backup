@@ -25,6 +25,37 @@ public:
         }
         return ans;
     }
+    int closestToZero(int arr[], int n)
+    {
+        // your code here
+        //we use the property of sorted  array and we know that the array is already sorted
+        //so we take two pointers and place one on the beginiing and other pointer on the another end of the array
+        //now we reduce the sum according if the sum is 0 then we return it else if we got the sum which is already less than the min_sum
+        // the we change our min_sum to the current sum and if we got the sum same as absolute of min_sum then we take maximum sum
+        // if sum is -ve we increase the difference
+        // else if sum is +ve we decrease the difference
+        sort(arr, arr + n);
+        int min_sum = INT_MAX, low = 0, high = n - 1;
+        while (low < high)
+        {
+            int sum = (arr[low] + arr[high]);
+            if (sum == 0)
+                return 0;
+            if (abs(sum) < abs(min_sum))
+            {
+                min_sum = sum;
+            }
+            if (abs(sum) == abs(min_sum))
+            {
+                min_sum = max(min_sum, sum);
+            }
+            if (sum < 0)
+                low++;
+            else
+                high--;
+        }
+        return min_sum;
+    }
 };
 
 // { Driver Code Starts.
