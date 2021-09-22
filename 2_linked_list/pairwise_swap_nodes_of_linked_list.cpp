@@ -12,6 +12,145 @@ struct Node {
     }
 };
 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        ListNode* dummy = new ListNode();
+        dummy->next = head;
+        ListNode* node = dummy;
+        while (node != NULL)
+        {
+            ListNode* first = node->next;
+            ListNode* second = NULL;
+            if (first != NULL)
+            {
+                second = first->next;
+            }
+            if (second != NULL)
+            {
+                ListNode* secondNext = second->next;
+                second->next = first;
+                node->next = second;
+                first->next = secondNext;
+                node = first;
+            }
+            else
+                break;
+        }
+        return dummy->next;
+
+    }
+
+};
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        ListNode* dummy = new ListNode();
+        dummy->next = head;
+        swap(dummy);
+        return dummy->next;
+
+    }
+    void swap(ListNode* node)
+    {
+        if (node == NULL)
+            return;
+        ListNode* first = node->next;
+        ListNode* second = NULL;
+        if (first != NULL)
+            second = first->next;
+        if (second != NULL)
+        {
+            ListNode* secondNext = second->next;
+            second->next = first;
+            node->next = second;
+            first->next = secondNext;
+            swap(first);
+        }
+    }
+};
+
+class Solution
+{
+public:
+    Node* pairWiseSwap(struct Node* head)
+    {
+        // The task is to complete this method
+        struct Node* dummy = new struct Node(0);
+        dummy->next = head;
+        swap(dummy);
+        return dummy->next;
+    }
+    void swap(struct Node* node)
+    {
+        if (node == NULL)
+            return;
+        struct Node* first = node->next;
+        struct Node* second = NULL;
+        if (first != NULL)
+        {
+            second = first->next;
+        }
+        if (second != NULL)
+        {
+            struct Node* secondNext = second->next;
+            second->next = first;
+            node->next = second;
+            first->next = secondNext;
+            swap(first);
+        }
+    }
+    Node* pairWiseSwap(struct Node* head)
+    {
+        // The task is to complete this method
+        struct Node* dummy = new struct Node(0);
+        dummy->next = head;
+        struct Node* node = new struct Node(0);
+        node = dummy;
+        while (node != NULL)
+        {
+            struct Node* first = node->next;
+            struct Node* second = NULL;
+            if (first != NULL)
+            {
+                second = first->next;
+            }
+            if (second != NULL)
+            {
+                struct Node* secondNext = second->next;
+                second->next = first;
+                node->next = second;
+                first->next = secondNext;
+                node = first;
+            }
+            else
+                break;
+        }
+        return dummy->next;
+    }
+};
+
 
 // } Driver Code Ends
 /*
