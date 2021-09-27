@@ -16,7 +16,28 @@ int main()
 		cin >> n;
 		if (n % 4 == 0) {
 			cout << "YES\n";
-			cout << "1 4\n2 3\n";
+			// cout << "1 4\n2 3\n";
+			vector<int> A, B;
+			for (int x = 1, f = 0; x <= n; x += 2, f = !f) {
+				if (f)
+				{
+					A.push_back(x);
+					B.push_back(x + 1);
+				}
+				else
+				{
+					A.push_back(x + 1);
+					B.push_back(x);
+				}
+			}
+			reverse(B.begin(), B.end());
+			for (auto i : A)
+				cout << i << " ";
+			cout << endl;
+			for (auto i : B)
+				cout << i << " ";
+			cout << endl;
+			cout << endl;
 		}
 		else
 		{
@@ -27,3 +48,4 @@ int main()
 
 	return 0;
 }
+
