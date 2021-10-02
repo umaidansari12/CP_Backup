@@ -8,7 +8,7 @@ vector<long long int> solveEven(long long int amount) {
 	two = amount / 2;
 	one = amount % 2;
 	long long int ans1 = one, ans2 = two, diff = INT_MAX;
-	while (one < two) {
+	while (one <= two) {
 		int current_diff = two - one;
 		if (diff > current_diff)
 		{
@@ -26,7 +26,7 @@ vector<long long int> solveEven(long long int amount) {
 vector<long long int> solveOdd(long long int amount) {
 	long long int two = 0, one = amount;
 	long long int ans1 = one, ans2 = two, diff = INT_MAX;
-	while (one > two) {
+	while (one >= two) {
 		int current_diff = one - two;
 		if (diff > current_diff)
 		{
@@ -40,6 +40,7 @@ vector<long long int> solveOdd(long long int amount) {
 	// cout << ans1 << " " << ans2 << endl;
 	return {ans1 + ans2, ans1, ans2};
 }
+
 int main()
 {
 	ios_base :: sync_with_stdio(false);
