@@ -29,6 +29,25 @@ public:
 		}
 		return ans;
 	}
+	int minIndexChar(string str, string patt)
+	{
+		// Your code here
+		int ans = INT_MAX;
+		unordered_map<char, int> m;
+		for (int i = 0; i < str.size(); i++) {
+			if (m.find(str[i]) == m.end())
+			{
+				m[str[i]] = i;
+			}
+		}
+		for (auto i : patt) {
+			if (m.find(i) != m.end())
+				ans = min(ans, m[i]);
+		}
+		if (ans == INT_MAX)
+			return -1;
+		return ans;
+	}
 };
 
 // { Driver Code Starts.
