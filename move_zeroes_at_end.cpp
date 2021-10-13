@@ -132,7 +132,7 @@ public:
 	}
 };
 
-class Solution {
+class Solution1 {
 public:
 	void moveZeroes(vector<int>& nums) {
 		vector<int> pos;
@@ -150,7 +150,7 @@ public:
 	}
 };
 
-class Solution {
+class Solution2 {
 public:
 	void moveZeroes(vector<int>& nums) {
 		vector<int> pos;
@@ -169,10 +169,17 @@ public:
 
 int main()
 {
-	ios_base :: sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-
+	string s;
+	cin >> s;
+	int a[2] = {0};
+	for (int i = 0; i < s.size(); i++) {
+		a[s[i] - '0']++;
+	}
+	for (int i = 1; i >= 0; i--) {
+		for (int j = 0; j < a[i]; j++) {
+			cout << i;
+		}
+	}
 
 	return 0;
 }
