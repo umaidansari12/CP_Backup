@@ -47,6 +47,51 @@ public:
 		reverse(r.begin(), r.end());
 		return r;
 	}
+	vector<long long> nextLargerElementBrute(vector<long long> a, int n) {
+		// Your code here
+		vector<long long> res(n, -1);
+		for (int i = 0; i < n; i++) {
+			for (int j = i + 1; j < n; j++) {
+				if (a[j] > a[i]) {
+					res[i] = a[j];
+					break;
+				}
+			}
+		}
+		return res;
+	}
+	//Function to find the next greater element for each element of the array.
+	vector<long long> nextLargerElementOptimalReverse(vector<long long> a, int n) {
+		// Your code here
+		vector<long long> res(n, -1);
+		stack<int> s;
+		for (int i = n - 1; i >= 0; i--) {
+			while (!s.empty() and a[s.top()] <= a[i]) {
+				s.pop();
+			}
+			if (s.size() != 0)
+				res[i] = a[s.top()];
+			s.push(i);
+		}
+		return res;
+	}
+	vector<long long> nextLargerElementOptimalFront(vector<long long> a, int n) {
+		// Your code here
+		vector<long long> res(n, -1);
+		stack<int> s;
+		for (int i = 0; i < n; i++) {
+			while (!s.empty() and a[s.top()] < a[i]) {
+				res[s.top()] = a[i];
+				s.pop();
+			}
+			s.push(i);
+		}
+		while (!s.empty()) {
+			res[s.top()] = -1;
+			s.pop();
+		}
+		return res;
+	}
 };
 
 // { Driver Code Starts.
