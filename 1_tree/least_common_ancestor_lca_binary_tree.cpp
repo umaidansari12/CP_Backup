@@ -70,6 +70,57 @@ public:
         }
         return p1[i - 1];
     }
+    bool findPath(Node* root, int n, vector<Node*> &r) {
+        if (!root)
+            return false;
+        r.push_back(root);
+        if (root->data == n)
+            return true;
+        if (findPath(root->left, n, r) or findPath(root->right, n, r))
+            return true;
+        r.pop_back();
+        return false;
+
+    }
+    Node* lca(Node* root , int n1 , int n2 )
+    {
+        //Your code here
+        vector<Node*> p, q;
+        if (!findPath(root, n1, p) or !findPath(root, n2, q))
+            return NULL;
+        Node* ans = NULL;
+        for (int i = 0; i < min(p.size(), q.size()); i++) {
+            if (p[i]->data != q[i]->data)
+            {
+                break;
+            }
+            else
+                ans = p[i];
+        }
+        return ans;
+
+    }
+    Node* lca(Node* root , int n1 , int n2 )
+    {
+        //Your code here
+        if (!root)
+            return NULL;
+
+        if (root->data == n1 or root->data == n2)
+            return root;
+
+        Node* left = lca(root->left, n1, n2);
+        Node* right = lca(root->right, n1, n2);
+
+        if (left == NULL)
+            return right;
+        else if (right == NULL)
+            return left;
+        else {
+            return root;
+        }
+
+    }
 };
 
 Node* lcaOptimal(Node* root , int n1 , int n2 )
