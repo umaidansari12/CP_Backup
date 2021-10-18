@@ -134,6 +134,49 @@ public:
         }
         return res[0];
     }
+    Node* prev = NULL;
+    // Changes left pointers to work as
+    // previous pointers in converted DLL
+    // The function simply does inorder
+    // traversal of Binary Tree and updates
+    // left pointer using previously visited node
+    void fixPrevPtr(Node* root) {
+        if (root != NULL) {
+            fixPrevPtr(root->left);
+            root->left = prev;
+            prev = root;
+            fixPrevPtr(root->right);
+        }
+    }
+    // Changes right pointers to work
+    // as next pointers in converted DLL
+    Node* fixNextPtr(Node* root) {
+        Node* prev = NULL;
+        // Find the right most node
+        // in BT or last node in DLL
+        while (root and root->right != NULL)
+            root = root->right;
+        // Start from the rightmost node,
+        // traverse back using left pointers.
+        // While traversing, change right pointer of nodes.
+        while (root and root->left != NULL) {
+            prev = root;
+            root = root->left;
+            root->right = prev;
+        }
+        // The leftmost node is head
+        // of linked list, return it
+        return root;
+
+    }
+    Node * bToDLL(Node *root)
+    {
+        // your code here
+        // Set the previous pointer
+        fixPrevPtr(root);
+        // Set the next pointer and return head of DLL
+        return fixNextPtr(root);
+    }
 };
 
 
