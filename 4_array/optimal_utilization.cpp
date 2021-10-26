@@ -9,7 +9,47 @@ using ll = long long;
   element form b such that the sum of their values is less or equal
   to target and as close to target as possible. Return a list of ids
   of selected elements. If no pair is possible, return an empty
-  list.*/
+  list.
+
+  4
+3
+1 2
+2 4
+3 6
+1
+1 2
+7
+4
+1 3
+2 5
+3 7
+4 10
+4
+1 2
+2 3
+3 4
+4 5
+10
+3
+1 8
+2 15
+3 9
+3
+1 8
+2 11
+3 12
+20
+3
+1 8
+2 7
+3 14
+3
+1 5
+2 10
+3 14
+20
+
+  */
 
 
 vector<pair<int, int>> optimalUtilizationBrute(vector<pair<int, int> > &a, vector<pair<int, int>> &b, int target) {
