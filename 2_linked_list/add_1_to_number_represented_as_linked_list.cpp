@@ -82,6 +82,33 @@ public:
         }
         return head;
     }
+    void solve(Node* head, int &carry) {
+        if (!head)
+            return;
+        solve(head->next, carry);
+
+        int sum = head->data;
+
+        sum += carry;
+
+        carry = sum / 10;
+
+        head->data = sum % 10;
+
+    }
+    Node* addOne(Node *head)
+    {
+        // Your Code here
+        // return head of list after adding one
+        int carry = 1;
+        solve(head, carry);
+        if (carry) {
+            Node* n = new Node(carry);
+            n->next = head;
+            head = n;
+        }
+        return head;
+    }
 };
 
 // { Driver Code Starts.
