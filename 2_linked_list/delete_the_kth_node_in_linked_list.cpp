@@ -57,3 +57,55 @@ LinkedListNode<int>* removeKthNode(LinkedListNode<int> *head, int K)
 
     return head;
 }
+
+/****************************************************************
+
+    Following is the class structure of the LinkedListNode class:
+
+    template <typename T>
+    class LinkedListNode
+    {
+    public:
+        T data;
+        LinkedListNode<T> *next;
+        LinkedListNode(T data)
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+
+*****************************************************************/
+
+LinkedListNode<int>* removeKthNode(LinkedListNode<int> *head, int K)
+{
+    // Write your code here.
+    if (!head)
+        return head;
+
+    if (K == 0)
+        return head;
+
+    LinkedListNode<int> *fast = head;
+    LinkedListNode<int> *slow = head;
+
+    for (int i = 0; i < K; i++) {
+        if (fast->next == NULL) {
+            if (i == (K - 1)) {
+                return head->next;
+            }
+            return head;
+        }
+        fast = fast->next;
+
+    }
+
+    while (fast->next) {
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    slow->next = slow->next->next;
+
+    return head;
+}

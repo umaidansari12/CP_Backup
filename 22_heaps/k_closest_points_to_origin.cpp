@@ -27,3 +27,39 @@ private:
         }
     };
 };
+
+
+class Solution {
+private:
+    struct manhattan_distance {
+        bool operator()(vector<int> &a, vector<int> &b) {
+            return (a[0] * a[0]) + (a[1] * a[1]) > (b[0] * b[0]) + (b[1] * b[1]);
+        }
+    };
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        priority_queue<vector<int>, vector<vector<int>>, manhattan_distance> closestPoints;
+
+        int _size = points.size();
+
+        for (int i = 0; i < _size; i++) {
+            closestPoints.push(points[i]);
+        }
+
+        vector<vector<int>> result;
+
+        // while(!closestPoints.empty()){
+        //    cout<<closestPoints.top()[0] << " "<<closestPoints.top()[1]<<endl;
+        //    closestPoints.pop();
+        // }
+
+        while (k--) {
+            result.push_back(closestPoints.top());
+            closestPoints.pop();
+        }
+
+
+        return result;
+
+    }
+};
