@@ -8,15 +8,9 @@ int main()
 	ios_base :: sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
-	int t = 1;
-	//cin >> t;
-	while (t--) {
-		int n;
-		cin >> n;
-		for (int i = 1; i <= 12; i++) {
-			cout << n << " * " << i << " = " << n*i << "\n";
-		}
-	}
+	double pi = 3.141592653, r;
+	cin >> r;
+	cout << fixed << setprecision(9) << pi*r*r;
 
 
 	return 0;

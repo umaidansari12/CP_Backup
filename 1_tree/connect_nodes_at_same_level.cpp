@@ -290,3 +290,23 @@ void connectNodes(BinaryTreeNode<int> *root) {
         nodesCount = que.size();
     }
 }
+
+//only works for complete binary tree
+
+void connect(Node *root)
+{
+    // Your Code Here
+    if (!root)
+        return;
+
+    if (root->left) {
+        root->left->nextRight = root->right;
+    }
+
+    if (root->right) {
+        root->right->nextRight = (root->nextRight) ? root->nextRight->left : NULL;
+    }
+    connect(root->left);
+    connect(root->right);
+
+}

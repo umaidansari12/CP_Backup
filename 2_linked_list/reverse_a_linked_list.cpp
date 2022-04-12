@@ -64,10 +64,42 @@ public:
         head = reverseHelper(head);
         return head;
     }
-
 };
 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        //  base case -> if the linked list is empty or contains single node then the list remains as it is so we are returning this in that case
+        // also we are boiling down to last node of linked list and there by returning its reference as it will be the new head of the reversed linked list
+        if (head == NULL or head->next == NULL)
+            return head;
 
+        // go deep till the last node of the linked list and return the newHead
+        ListNode* newHead = reverseList(head->next);
+
+        //current's head next that means next of the current element and its next will be head
+        // reversing the pointer instead of 1->2 doing 1<-2
+
+        head->next->next = head;
+
+        head->next = NULL; // 1->2 x cutting this link
+
+        //return last node of the linked list as it is the newHead
+        return newHead;
+
+
+    }
+};
 
 // { Driver Code Starts.
 

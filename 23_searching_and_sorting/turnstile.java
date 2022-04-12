@@ -27,6 +27,7 @@ public int[] getTimes(int[] times, int[] directions) {
 			lastDir = 1;
 			timeStamp = Math.min(nextEnterTime, nextExitTime);
 			continue;
+
 		} else if (nextEnterTime <= timeStamp && nextExitTime <= timeStamp) {
 			// direction does not change here, no need to update lastDir
 			Person person = lastDir == 1 ? exitQueue.poll() : enterQueue.poll();
